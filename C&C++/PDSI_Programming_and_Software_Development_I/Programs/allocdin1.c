@@ -1,16 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void aloca(float **x, int n){ // Passagem de vetor por referência
-	*x = (float*)malloc(n*sizeof(float));
+void aloca(float ** x, int n) { // Passagem de vetor por referência
+	*x = (float*)malloc(n * sizeof(float));
 	
-	for(int i=0; i<n; i++){
-		(*x)[i] = 0; //*((*x)+i) = 0;
-	}
-	
+	for(int i = 0; i < n; i++) (*x)[i] = 0; //*((*x)+i) = 0;
 }
 
-int main(){
+int main() {
 	/*float x; // 4 bytes(32 bits)/enderecos na memória alocados automaticamente
 	
 	float *p=NULL;// Armazena float*
@@ -30,14 +27,14 @@ int main(){
 	free(p); //Libera o espaço alocado por malloc
 	*/
 	
-	int n=0;
-	
+	int n = 0;
+	printf("Digite o tamanho do vetor:\n");
 	scanf("%d", &n);
 	
-	if(n>0){
+	if(n>0) {
 		
 		//float v[n]; // Nao funciona: n é desconhecido em tempo de execução
-		float *v=NULL;
+		float * v = NULL;
 		/*
 		v = (float*)malloc(n * sizeof(float)); // Cria um vetor v[n]
 		
@@ -47,23 +44,13 @@ int main(){
 		*/
 		aloca(&v, n);
 		
-		for(int i=0; i<n; i++){
+		for(int i = 0; i < n; i++){
 			printf("v[%d] = %.1f", i, v[i]);
 			printf("\n");
 		}
 		
 		free(v);
-		
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	return 0;
 }

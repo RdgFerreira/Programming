@@ -5,16 +5,16 @@ typedef struct data  {
 } DATA;
 
 typedef struct pessoa {
-    int Nome;
+    char Nome[100];
     int Idade;
     float Salario;
     DATA Nasc;
 } PESSOA;
 
-void Ler(PESSOA *ptr)
+void Ler(PESSOA * ptr)
 {
     printf("Qual o Nome             : "); 
-    scanf("%d", &(*ptr).Nome);
+    scanf("%s", &(*ptr).Nome);
     printf("Qual a Idade            : "); 
     scanf("%d", &(*ptr).Idade);
     printf("Qual o Salario          : "); 
@@ -26,9 +26,9 @@ void Ler(PESSOA *ptr)
 int main() {
     PESSOA p;
     Ler(&p);
-    printf("%d", p.Nome);
-    printf("%d\n", p.Idade);
-    printf("%f\n", p.Salario);
-    printf("%d\n", p.Nasc.Dia);
+    printf("Nome: %s\n", p.Nome);
+    printf("Idade: %d\n", p.Idade);
+    printf("Salario: %f\n", p.Salario);
+    printf("Ano Nascimento: %d\n", p.Nasc.Ano);
     return 0;
 }
