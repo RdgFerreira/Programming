@@ -1,0 +1,12 @@
+A) Uma condição if em SML sempre deve ser seguida das cláusulas "then" e "else". Neste caso, a cláusula "else" está faltando,
+e o código explicita a tentativa de finalizar a  avaliação da expressão com repetidos inputs de ";". 
+Logo, o interpretador lança um erro de sintaxe indicando a remoção dos ";", ocasionada pela tentativa de avaliação de
+uma expressão incompleta.
+
+B) O erro consiste em apontar o uso indevido do operador "*", que, apesar de suportar apenas uma dupla de inteiros (Z) 
+ou uma dupla de reais (R), foi usado com uma dupla contendo um inteiro (1) e um real (2.0).
+
+C) O interpretador aponta redundância no casamento de padrões na definição da função. 
+Note que a chamada recursiva existente em "fact n = n * fact (n - 1)" eventualmente
+gerará a chamada de fact com n = 0 (Tipo de n é inferido como inteiro dado os operadores envolvidos).
+Nesse sentido, o padrão explicitado "fact 0 = 1" é redundante, dada a primeira definição de fact.

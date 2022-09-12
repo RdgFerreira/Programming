@@ -1,0 +1,16 @@
+(a) i+r   ==> int * real -> real
+
+(b) i+r+i   ==>  (i + r) + i: associação à esquerda
+==> + dentro do parênteses: int * real -> real
+==> + fora do parênteses: real * int -> real
+
+(c) i+(r+i)   ==> associação forçada pelo parênteses: (i + (r + i))
+==> + dentro do parênteses: real * int -> real
+==> + fora do parênteses: int * real -> real
+
+(d) i+i+r+(r+i)   ==> ((i + i) + r) + (r + i)
+Da expressão a esquerda, considere os símbolos + da esquerda para a direita:
+==> Primeiro +: int * int -> int
+==> Segundo +: int * real -> real
+==> Terceiro +: real * real -> real
+==> Quarto +: real * int -> real

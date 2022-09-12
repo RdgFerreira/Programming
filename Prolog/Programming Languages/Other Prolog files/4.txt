@@ -1,0 +1,51 @@
+-> Construir predicados para tamanhos de listas
+    --> l([], 0).
+    --> l([_|T], N) :- l(T, NT), N = NT + 1. (implicação)
+    --> ?_ l([1,2], N). --> N = 0 + 1 + 1
+    --> ?_ l([1,2], 2). --> false
+    --> ?_ 2 = 0 + 1 + 1: Unificação sintática: termos sem variáveis, 
+                          logo não existe atribuição que torna os termos exatamente iguais sintaticamente.
+    --> ?_l([1,2], 0 + 1 + 1). --> true
+    --> ?_ 2 is 0 + 1 + 1. --> true (2 avalia sintaticamente para 0 + 1 + 1 ==> Predicados numéricos)
+    --> ?_ 1 + 1 is 0 + 1 + 1. --> false (somente a expressão a direita é avaliada)
+    --> ?_ 1 + 1 =:= 0 + 1 + 1. --> true (dois lados avaliados)
+
+    --> Refutação:
+    --> F = {l([], 0)} (Fato)
+    --> R = {l([_|T], N) v not(l(T, NT)) v not(N = NT + 1)} (Regra)
+    --> Q = {l([1], 1)}
+
+        --> R, not(l([1], 1)) == Res, (T = [], N = 1, aplicados ao primeiro termo de R, sobra os outros dois)
+        --> F, not(l([], NT)) v not(1 = NT + 1) == Res, (NT = 0, casando com o fato, sobra o último termo da regra)
+        --> not(1 = 0 + 1) --> True, pois usamos unificação sintática e produzimos not(False)
+            ---> Caso fosse not(1 is 0 + 1), teríamos derivado falso e a refutação valida a consulta.
+
+-> Predicados numéricos
+    --> ?_ X = 1, Y is X + 1. --> Y is X + 1, X = 1.
+    --> ?_ Y is X + 1, X = 1. --> ERRO: X é variável livre em Y is X + 1
+    --> ?_ X is Y + 1. --> ERRO
+
+    --> Caso l fosse:
+    l([], 0).
+    l([_|T], N) :- l(T, NT), N =:= NT + 1.
+    --> ?_ l([1], 1). --> true, mas
+    --> ?_ l([1,2], 2) --> ERRO, pois em um passo da resolução, 
+                           os dois lados tem de ser avaliados, mas um dos lados possui uma variável intermediária livre.
+
+    --> ?_ X is 2 - 1. --> X = 1.
+    --> ?_ X is 1/2. --> X = 0.5.
+    --> ?_ number(false). --> false
+    --> ?_ number(2). --> true.
+
+    --> Somar elementos de uma lista.
+    --> sum([], 0).
+    --> sum([H|T], R) :- sum(T, RT), R is H + RT.
+
+    --> ?_ sum([X,2], 3). --> ERRO, X seria variável livre. Caso tivéssemos number(H), seria false o resultado.
+
+    --> fatorial.
+    --> fact(0, 1).
+    --> fact(1, 1).
+    --> fact(I, N) :- number(I), I' is I - 1, fact(I', N'), N is N' * I.
+
+    --> fact(5, N). --> N = 120.

@@ -1,0 +1,27 @@
+-> Unificador Mais Geral (Most General Unifier, MGU) (Usado no interpretador de Prolog)
+    --> <s,t>, Sigma é MGU sse s(Sigma) = t(Sigma) e todo Unificador Theta de s,t
+        é tal que existe uma substituição Ro e Theta = (Sigma) o (Ro)
+    --> parent(X,Y) = parent(kim, Y).
+        ---> {X = kim, Y = holly} = Theta
+        ---> {X |-> kim} = Sigma
+        ---> {Y |-> holly} = Ro
+
+-> Resolução: regra de inferência
+    --> {C1 v l1, C2 v not(l2)} == Resolução, Theta tal que l1(Theta) = l2(Theta)  => {(C1 v C2)(Theta)} (Remoção do pivô l)
+        ---> (C1, C2): Cláusulas: Disjunção de literais
+        ---> literais: Termos compostos ou sua negação
+
+-> Refutações (*: and)
+    --> Fatos * Regras => Query
+    --> Fatos * Regras * not(Query) => Falso
+    --> Se conseguimos derivar Falso a partir dessa negação da Consulta (Query), então a consulta é válida.
+    --> Transformar em CNF para aplicar Resolução. (B :- A equivale a A -> B == not(A) v B)
+
+    --> ?_ p(margaret, X), p(X,holly) (Query = Q)
+        --> not(Q) = not(p(margaret, X)) v not(p(X,holly))
+
+        --> {Falso:C1 v p(margaret, kim):l1, not(X, holly):C2 v not(p(margaret, X)):l2} == Res, Theta = {X = kim}
+            ---> {not(p(X, holly)){X = kim}}
+
+        --> {not(p(kim, holly))  parent(kim, holly)} == Res, Theta = {}
+            ---> Falso!!! 

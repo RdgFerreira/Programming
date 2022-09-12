@@ -1,0 +1,1 @@
+third([_,_,X|Tail], Y) :- (X = Y).
