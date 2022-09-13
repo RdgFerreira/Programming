@@ -25,6 +25,7 @@ void Ler(PESSOA * ptr)
 
 int main() {
     PESSOA p;
+
     Ler(&p);
     printf("Nome: %s\n", p.Nome);
     printf("Idade: %d\n", p.Idade);
